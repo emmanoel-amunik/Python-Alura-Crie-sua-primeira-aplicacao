@@ -1,9 +1,7 @@
 import os
 
 
-def _finalize_the_app():
-    os.system("cls")
-    print("Shutting down the app...\n")
+restaurants = ["Pizza", "Sushi"]
 
 
 def display_program_name():
@@ -18,17 +16,64 @@ def display_options():
 
 
 def chose_option():
+    try:
+        chosen_option = int(input("Choose an option: "))
 
-    chosen_option = int(input("Choose an option: "))
+        if chosen_option == 1:
+            register_new_restaurant()
+        elif chosen_option == 2:
+            list_restaurants()
+        elif chosen_option == 3:
+            print("Activate restaurant")
+        elif chosen_option == 4:
+            _finalize_the_app()
+        else:
+            invalid_option()
+    except ValueError:
+        invalid_option()
 
-    if chosen_option == 1:
-        print("Register restaurant")
-    elif chosen_option == 2:
-        print("List restaurant")
-    elif chosen_option == 3:
-        print("Activate restaurant")
-    else:
-        _finalize_the_app()
+
+def invalid_option():
+
+    print("Invalid option!\n")
+    return_to_the_main_menu()
+
+
+def register_new_restaurant():
+
+    show_subtitle("New restaurants register")
+
+    restaurant_name = input("Type the restaurant's name: ")
+    restaurants.append(restaurant_name)
+    print(f"The restaurant {restaurant_name} is successfully registered.")
+
+    return_to_the_main_menu()
+
+
+def list_restaurants():
+
+    show_subtitle("Listing restaurants...")
+
+    for restaurant in restaurants:
+        print(f".{restaurant}")
+
+    return_to_the_main_menu()
+
+
+def show_subtitle(text):
+
+    os.system("cls")
+    print(f"{text}\n")
+
+
+def return_to_the_main_menu():
+    input("\nPress a key to return to the main menu ")
+    main()
+
+
+def _finalize_the_app():
+    os.system("cls")
+    print("Shutting down the app...\n")
 
 
 def main():
