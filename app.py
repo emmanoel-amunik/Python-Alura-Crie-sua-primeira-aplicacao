@@ -1,7 +1,9 @@
 import os
 
 
-restaurants = ["Pizza", "Sushi"]
+restaurants = [{"name": "Square", "category": "Japanese", "activate": False},
+               {"name": "Supreme", "category": "Italian", "activate": True},
+               {"name": "Cantina", "category": "Italian", "activate": False}]
 
 
 def display_program_name():
@@ -44,7 +46,12 @@ def register_new_restaurant():
     show_subtitle("New restaurants register")
 
     restaurant_name = input("Type the restaurant's name: ")
-    restaurants.append(restaurant_name)
+    category = input(f"Type the {restaurant_name}'s category: ")
+
+    restaurant_data = {"name": restaurant_name, "category": category,
+                       "activate": False}
+    restaurants.append(restaurant_data)
+
     print(f"The restaurant {restaurant_name} is successfully registered.")
 
     return_to_the_main_menu()
@@ -55,7 +62,10 @@ def list_restaurants():
     show_subtitle("Listing restaurants...")
 
     for restaurant in restaurants:
-        print(f".{restaurant}")
+        restaurant_name = restaurant["name"]
+        category = restaurant["category"]
+        status = restaurant["activate"]
+        print(f"-> {restaurant_name} | {category} | {status}")
 
     return_to_the_main_menu()
 
