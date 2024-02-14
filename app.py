@@ -26,7 +26,7 @@ def chose_option():
         elif chosen_option == 2:
             list_restaurants()
         elif chosen_option == 3:
-            print("Activate restaurant")
+            change_status()
         elif chosen_option == 4:
             _finalize_the_app()
         else:
@@ -66,6 +66,30 @@ def list_restaurants():
         category = restaurant["category"]
         status = restaurant["activate"]
         print(f"-> {restaurant_name} | {category} | {status}")
+
+    return_to_the_main_menu()
+
+
+def change_status():
+
+    show_subtitle("Changing the restaurant's status...")
+
+    restaurant_name = input("Type the restaurant's name to change status: ")
+    restaurant_found = False
+
+    for restaurant in restaurants:
+
+        if restaurant_name == restaurant["name"]:
+            restaurant_found = True
+            restaurant["activate"] = not restaurant["activate"]
+
+            if restaurant["activate"]:
+                print(f"The restaurant {restaurant_name} was activated")
+            else:
+                print(f"The restaurant {restaurant_name} was disabled")
+
+    if not restaurant_found:
+        print("The restaurant was not found")
 
     return_to_the_main_menu()
 
