@@ -13,7 +13,7 @@ def display_program_name():
 def display_options():
     print("1. Register restaurant")
     print("2. List restaurant")
-    print("3. Activate restaurant")
+    print("3. Change status")
     print("4. Exit\n")
 
 
@@ -61,11 +61,12 @@ def list_restaurants():
 
     show_subtitle("Listing restaurants...")
 
+    print(f" {'Restaurant Name'.ljust(22)} {'Category'.ljust(22)}{'Status'}")
     for restaurant in restaurants:
         restaurant_name = restaurant["name"]
         category = restaurant["category"]
-        status = restaurant["activate"]
-        print(f"-> {restaurant_name} | {category} | {status}")
+        status = "Activated" if restaurant["activate"] else "Disabled"
+        print(f"-> {restaurant_name.ljust(20)} {category.ljust(20)} {status}")
 
     return_to_the_main_menu()
 
@@ -95,9 +96,9 @@ def change_status():
 
 
 def show_subtitle(text):
-
     os.system("cls")
-    print(f"{text}\n")
+    line = "*" * (len(text) + 4)
+    print(f"{line}\n   {text}\n {line}\n")
 
 
 def return_to_the_main_menu():
